@@ -1,0 +1,14 @@
+.more-quotes-container {
+	width: 90%;
+}
+.more-quotes-container h2 {
+	margin-bottom: 3rem;
+	margin-left: 5rem;
+}
+.list-items {
+	list-style: none;
+}
+
+.list-items li {
+	font-size: 1.25rem;
+}

@@ -1,0 +1,10 @@
+.footer {
+	font-family: 'Montserrat', sans-serif;
+	color: #828282;
+	text-align: center;
+}
+
+.footer a {
+	color: inherit;
+	font-weight: bold;
+}
