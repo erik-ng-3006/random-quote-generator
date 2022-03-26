@@ -7,15 +7,15 @@ import axios from 'axios';
 
 function MainContainer() {
 	const [shownMoreQuotes, setShownMoreQuotes] = useState(false);
-	const [quotes, setQuotes] = useState('');
+	const [quote, setQuote] = useState(null);
+	const [moreQuotes, setMoreQuotes] = useState(null);
 
-	const fetchData = useCallback(() => {
+	const updateQuote = useCallback(() => {
 		axios
-			.get('https://quote-garden.herokuapp.com/api/v3/quotes')
+			.get('https://api.quotable.io/random')
 			.then(function (response) {
 				// handle success
-				console.log(response.data.data);
-				setQuotes(response.data.data);
+				setQuote(response.data);
 			})
 			.catch(function (error) {
 				// handle error
@@ -24,23 +24,51 @@ function MainContainer() {
 	}, []);
 
 	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+		updateQuote();
+	}, [updateQuote]);
+
+	const getMoreQuotes = useCallback(() => {
+		if (quote) {
+			axios
+				.get(`https://quotable.io/quotes?author=${quote.author}`)
+				.then(function (response) {
+					// handle success
+					setMoreQuotes(response.data.results);
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+				});
+		}
+	}, [quote]);
+
+	let content;
+
+	if (quote && shownMoreQuotes) {
+		content = (
+			<MoreQuotesContainer
+				quote={quote}
+				setShownMoreQuotes={setShownMoreQuotes}
+				moreQuotes={moreQuotes}
+			/>
+		);
+	} else if (quote && !shownMoreQuotes) {
+		content = (
+			<QuoteContainer
+				getMoreQuotes={getMoreQuotes}
+				quote={quote}
+				setShownMoreQuotes={setShownMoreQuotes}
+			/>
+		);
+	}
 
 	return (
 		<main role='main' className={styles.main}>
 			<RandomButton
-				setQuotes={setQuotes}
+				updateQuote={updateQuote}
 				setShownMoreQuotes={setShownMoreQuotes}
 			/>
-			{shownMoreQuotes ? (
-				<MoreQuotesContainer setShownMoreQuotes={setShownMoreQuotes} />
-			) : (
-				<QuoteContainer
-					quotes={quotes}
-					setShownMoreQuotes={setShownMoreQuotes}
-				/>
-			)}
+			{content}
 		</main>
 	);
 }

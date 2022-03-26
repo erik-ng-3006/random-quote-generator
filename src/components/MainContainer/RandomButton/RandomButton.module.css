@@ -12,7 +12,7 @@
 	vertical-align: middle;
 	font-size: inherit;
 	color: inherit;
-	transition: transform 500ms ease-out;
+	transition: transform 500ms ease-out !important;
 }
 .btn:hover .icon {
 	transform: rotate(1turn);

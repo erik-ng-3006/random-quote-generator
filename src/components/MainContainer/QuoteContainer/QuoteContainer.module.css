@@ -1,3 +1,9 @@
 .quote-container {
 	width: 80%;
 }
+
+@media (min-width: 768px) {
+	.quote-container {
+		width: 60%;
+	}
+}
