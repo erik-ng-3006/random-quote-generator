@@ -36,7 +36,7 @@
 
 ## Overview
 
-![screenshot](https://github.com/erik-ng-3006/)
+![screenshot](https://github.com/erik-ng-3006/random-quote-generator/blob/main/public/screenshot.png)
 
 ### Built With
 
