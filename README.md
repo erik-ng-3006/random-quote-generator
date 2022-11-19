@@ -74,4 +74,4 @@ $ npm start
 
 ## Contact
 
--   GitHub [@erik-ng](https://{github.com/erik-ng-3006})
+-   GitHub [@erik-ng](https://github.com/erik-ng-3006)
